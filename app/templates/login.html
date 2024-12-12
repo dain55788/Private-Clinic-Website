@@ -12,15 +12,15 @@
 <body>
     <div class="container">
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form method="post" action="/login">
                 <h1>Đăng Nhập</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                 </div>
                 <span>hoặc sử dụng tài khoản</span>
-                <input type="text" placeholder="Số Điện Thoại (+84)" id="phone"/>
-                <input type="password" placeholder="Mật Khẩu" name="password" />
+                <input type="text" placeholder="Số Điện Thoại (+84)" id="phone" name="phone" />
+                <input type="password" placeholder="Mật Khẩu" id ="password" name="password" />
                 <a href="#">Quên mật khẩu?</a>
                 <button>Đăng Nhập</button>
                 <p>Chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
@@ -34,6 +34,5 @@
             <a target="_self" href="mainPage.html">Be<span>Strong</span></a>
         </p>
     </footer>
-    <script src="static/scriptExe/login.js"></script>
 </body>
 </html>

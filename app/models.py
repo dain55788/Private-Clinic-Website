@@ -2,9 +2,11 @@ from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float, Enum
 from sqlalchemy.orm import relationship
 from app import db, app
 from enum import Enum as RoleEnum
+import hashlib
 from flask_login import UserMixin
 import datetime
 from datetime import datetime
+
 
 # NOTE: SỬA LẠI TOÀN BỘ CSDL, CÁC BẢNG USER, ARRANGEMENTS, ARR_LISTS, test với các data
 
@@ -21,9 +23,13 @@ class User(db.Model, UserMixin):
     name = Column(String(50))
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(50), nullable=False)
+    gender = Column(String(50), nullable=True)
     phone = Column(String(20), nullable=False)
     user_role = Column(Enum(UserRole), default=UserRole.USER)
     arrangement = relationship('Arrangement', backref='user', lazy=True)  # Backref tới bảng Arrangement
+
+    def get_id(self):
+        return self.id_patient
 
 
 class ArrList(db.Model):
@@ -38,7 +44,7 @@ class Arrangement(db.Model):
     id_arrangement = Column(Integer, primary_key=True, autoincrement=True)
     id_arr_list = Column(Integer, ForeignKey(ArrList.id_arr_list), nullable=True)
     id_patient = Column(Integer, ForeignKey(User.id_patient), nullable=False)  # Khóa ngoại tham chiếu User.id_patient
-    id_nurse = Column(Enum(UserRole), default=UserRole.NURSE, nullable=True) # nullable
+    id_nurse = Column(Enum(UserRole), default=UserRole.NURSE, nullable=True)  # nullable
     appointment_date = Column(DateTime, nullable=False)
     description = Column(String(255), nullable=True)
 
@@ -49,17 +55,26 @@ if __name__ == '__main__':
         import hashlib
 
         users = [{
-            "name" : "nguyen dai nurse",
-            "username" : "nurse",
+            "name": "nguyen dai nurse",
+            "username": "nurse",
+            "gender": "Nữ",
             "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
-            "phone": "0903214124",
-            "user_role" : UserRole.NURSE
+            "phone": "0903021744",
+            "user_role": UserRole.NURSE
         }, {
             "name": "nguyen dai",
             "username": "patient123",
+            "gender": "Nam",
             "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
             "phone": "0903214124",
             "user_role": UserRole.USER
+        }, {
+            "name": "nguyen dai doctor",
+            "username": "doctor",
+            "gender": "Nam",
+            "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
+            "phone": "0903021746",
+            "user_role": UserRole.DOCTOR
         }]
         # delete all users, arr_lists, arrangements before adding
         # db.session.query(Arrangement).delete()
@@ -73,6 +88,7 @@ if __name__ == '__main__':
         db.session.commit()
 
         import pytz
+
         test_date = datetime.now()
 
         # # add patient id to arrangements
@@ -91,5 +107,3 @@ if __name__ == '__main__':
         #     db.session.add(arrangement)
         #
         # db.session.commit()
-
-

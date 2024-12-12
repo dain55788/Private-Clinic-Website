@@ -12,3 +12,4 @@ app.config["PAGE_SIZE"] = 6
 db = SQLAlchemy(app)
 
 login = LoginManager(app)
+
