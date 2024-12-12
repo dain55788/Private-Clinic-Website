@@ -4,46 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập hoặc Đăng ký</title>
-    <link rel="shortcut icon" type="image/png" sizes="32x32" href="/images/clinic.png">
+    <title>Đăng Nhập</title>
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="static/images/clinic.png">
     <link rel="stylesheet" href="static/styleExe/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h1>Tạo tài khoản</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                </div>
-                <span>hoặc sử dụng số điện thoại của bạn để đăng ký</span>
-                <div class="hoTen">
-                    <input type="text" placeholder="Họ" /> <input type="text" placeholder="Tên" />
-                    <div>
-                        <select class="gender" name="gender">
-                        <option value="" disabled selected>Giới tính</option>
-                        <option value="male">Nam</option>
-                        <option value="female">Nữ</option>
-                        <option value="other">Khác</option>
-                        </select>
-                    </div>
-                </div>
-                <input type="phoneNum" placeholder="(+84)" />
-                <input type="password" placeholder="Mật khẩu" />
-                <input type="password" placeholder="Xác nhận mật khẩu" />
-                <div class="terms-container">
-                    <input type="checkbox" id="accept-terms">
-                    <p>
-                        Bằng việc nhấn tiếp tục, bạn chấp nhận 
-                        <a href="#">Điều khoản sử dụng</a> và 
-                        <a href="#">Quyền riêng tư</a> của chúng tôi.
-                    </p>
-                </div>
-                <button>Đăng ký</button>
-            </form>
-        </div>
+    <div class="container">
         <div class="form-container sign-in-container">
             <form action="#">
                 <h1>Đăng Nhập</h1>
@@ -52,34 +19,21 @@
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                 </div>
                 <span>hoặc sử dụng tài khoản</span>
-                <input type="PhoneNum" placeholder="Số Điện Thoại" />
-                <input type="password" placeholder="Mật Khẩu" />
+                <input type="text" placeholder="Số Điện Thoại (+84)" id="phone"/>
+                <input type="password" placeholder="Mật Khẩu" name="password" />
                 <a href="#">Quên mật khẩu?</a>
                 <button>Đăng Nhập</button>
+                <p>Chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
             </form>
         </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Chào mừng bạn!</h1>
-                    <p>Để giữ liên lạc với chúng tôi, bạn hãy đăng nhập bằng thông tin riêng!</p>
-                    <button class="ghost" id="signIn">Đăng Nhập</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Chào mừng bạn!!</h1>
-                    <p>Hãy đăng ký tài khoản của bạn và bắt đầu hành trình với BeSTRONG</p>
-                    <button class="ghost" id="signUp">Đăng ký</button>
-                </div>
-            </div>
-        </div>
     </div>
-    
+
     <footer>
         <p>
             Created with <i class="fa fa-heart"></i> by
-            <a target ="_self" href="mainPage.html">Be<span>Strong</span></a>
+            <a target="_self" href="mainPage.html">Be<span>Strong</span></a>
         </p>
     </footer>
-    <script src = "static/scriptExe/login.js"></script>
+    <script src="static/scriptExe/login.js"></script>
 </body>
 </html>

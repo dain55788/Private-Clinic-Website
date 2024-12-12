@@ -6,8 +6,57 @@
 <!-- To TOP Button -->
 <a class="top" href="#"></a>
 
-<!-- Make an arrangement section here -->
+<!-- Arrangement section here -->
+<!-- contact section start  -->
 
+<section id="contact" class="contact">
+
+    <h1 class="heading">Đặt Lịch Khám với BeSTRONG</h1>
+    <h3 class="title">bạn có thể đặt lịch khám với chúng tôi bất cứ lúc nào và bất kì nơi đâu</h3>
+
+    <div class="row">
+
+        <!-- form images  -->
+        <div class="images">
+            <img src="static/images/form-booking.png" alt="">
+        </div>
+
+        <div class="form-container">
+            <label for="phone">Số điện thoại:*</label>
+            <input type="number" placeholder="(+84)" name="" id="">
+            <label for="fullName">Họ và Tên:*</label>
+            <input type="text" placeholder="Họ và Tên*" name="" id="">
+            <label for="email">Email:*</label>
+            <input type="email" placeholder="Email*" name="" id="">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthDate">Ngày Sinh:</label>
+                    <input type="date" id="birthDate">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Giới Tính:*</label>
+                    <select id="gender">
+                        <option value="" disabled selected>Giới tính</option>
+                        <option value="male">Nam</option>
+                        <option value="female">Nữ</option>
+                        <option value="other">Khác</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                <label for="">Chọn Lịch Khám:*</label>
+                <input type="date" id="appointmentDate">
+                </div>
+            </div>
+            <label for="address">Địa chỉ:</label>
+            <input type="text" placeholder="Địa chỉ" name="" id="">
+            <textarea name="" cols="30" rows="10" id="" placeholder="Bệnh nhân ghi chú tại đây (Tình trạng đang gặp phải mô tả về bệnh, ...)"></textarea>
+            <input type="submit" value="Gửi">
+        </div>
+    </div>
+</section>
+
+
+<!-- contact section end  -->
 <!-- Arrangement section ends -->
 
 <!-- jquery cdn link  -->
@@ -16,5 +65,4 @@
 <!-- custom js file link  -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script src="static/scriptExe/mainScript.js"></script>
-
 {% endblock %}

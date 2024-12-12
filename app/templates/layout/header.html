@@ -1,18 +1,23 @@
 {% block header%}
-<a href="mainPage.html">
+<a href="/">
     <img class="logo" src="static/images/logo.png" alt="Logo Phòng Khám">
 </a>
 
 <!-- navbar link  -->
 <nav class="navbar">
     <ul>
-        <li><a href="#home">Trang Chủ</a></li>
+        <li><a href="/">Trang Chủ</a></li>
         <li><a href="#about">Về Chúng Tôi</a></li>
         <li><a href="#doctor">Các Chuyên Gia</a></li>
         <li><a href="#review">Nhận Xét</a></li>
         <li><a href="#contact">Liên Hệ Chúng Tôi</a></li>
         <li><a href="#blog">Bài Viết</a></li>
+        {% if current_user.is_authenticated %}
+        <li><a target="_blank" href="/user_arrangement" class="btn">Chào {{ current_user.username }}.</a></li>
+        <li><a class="nav-link text-success" href="/logout">Đăng xuất</a></li>
+        {% else %}
         <li><a target="_blank" href="/login" class="btn">Đăng Nhập</a></li>
+        {% endif %}
     </ul>
 </nav>
 <div class="fas fa-bars"></div>
