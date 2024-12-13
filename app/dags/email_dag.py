@@ -3,7 +3,11 @@ import ssl
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from airflow import DAG
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+sendgrid_api_key = os.getenv("SENDGRID_API_KEY")
 
 def email():
     # ssl._create_default_https_context = ssl._create_unverified_context
@@ -20,7 +24,7 @@ def email():
     )
 
     # main execution
-    sg = SendGridAPIClient("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")
+    sg = SendGridAPIClient(sendgrid_api_key)  # your actual Sengrid API key here
     response = sg.send(message)
     print(response.status_code)
     print(response.body)
