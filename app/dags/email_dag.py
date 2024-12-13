@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-sendgrid_api_key = os.getenv("SENDGRID_API_KEY")
+sendgrid_api_key = os.getenv("SENDGRID_API_KEY")  # take the API key in the .env file
+
 
 def email():
     # ssl._create_default_https_context = ssl._create_unverified_context
