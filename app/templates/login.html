@@ -10,29 +10,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container sign-in-container">
-            <form method="post" action="/login">
-                <h1>Đăng Nhập</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                </div>
-                <span>hoặc sử dụng tài khoản</span>
-                <input type="text" placeholder="Số Điện Thoại (+84)" id="phone" name="phone" />
-                <input type="password" placeholder="Mật Khẩu" id ="password" name="password" />
-                <a href="#">Quên mật khẩu?</a>
-                <button>Đăng Nhập</button>
-                <p>Chưa có tài khoản? <a href="/register">Đăng ký ngay</a></p>
-            </form>
-        </div>
+<div class="container">
+    <div class="form-container sign-in-container">
+        <form method="post" action="/login">
+            <h1>Đăng Nhập</h1>
+            <div class="social-container">
+                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            </div>
+            <span>hoặc sử dụng tài khoản</span>
+            <input type="text" placeholder="Số Điện Thoại (+84)" id="phone" name="phone"/>
+            <input type="password" placeholder="Mật Khẩu" id="password" name="password"/>
+            <a href="#" id="login_btn">Quên mật khẩu?</a>
+            <button>Đăng Nhập</button>
+            <p>Chưa có tài khoản? <a href="/register"
+                                     style="color: #2ba0ff; text-decoration: underline; font-weight: bold;">Đăng ký
+                ngay</a></p>
+        </form>
     </div>
+    <!-- Password Reset Popup starts -->
+    <!-- <div class="login-form-container">
+        <i class="fas fa-times" id="form_close"></i>
 
-    <footer>
-        <p>
-            Created with <i class="fa fa-heart"></i> by
-            <a target="_self" href="mainPage.html">Be<span>Strong</span></a>
-        </p>
-    </footer>
+        <form action="">
+            <input type="email" class="box" placeholder="Nhập vào số điện thoại để đổi mật khẩu">
+            <input type="password" class="box" placeholder="Nhập vào mật khẩu mới">
+            <input type="password" class="box" placeholder="Xác nhận mật khẩu mới">
+            <input type="submit" value="Đổi mật khẩu" class="btn">
+        </form>
+    </div> -->
+    <!-- Password reset pop up ends-->
+</div>
+
+
+<footer>
+    <p>
+        Created with <i class="fa fa-heart"></i> by
+        <a target="_self" href="/">Be<span>Strong</span></a>
+    </p>
+</footer>
+
+<script src="static/scriptExe/login.js"></script>
 </body>
 </html>

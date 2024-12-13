@@ -1,10 +1,8 @@
-import math
-
-from flask import render_template, request, redirect, jsonify, session
+from flask import render_template, request, redirect
 import dao
 from app import app, login
-from flask_login import login_user, logout_user, login_required
-from app.models import User, UserRole
+from flask_login import login_user, logout_user, login_required, current_user
+from app.src.models import User
 
 
 @app.route("/")
@@ -14,6 +12,9 @@ def index():
 
 @app.route("/login", methods=['get', 'post'])
 def login_process():
+    if current_user.is_authenticated:
+        return redirect('/')
+
     if request.method.__eq__('POST'):
         phone = request.form.get('phone')
         password = request.form.get('password')
@@ -35,22 +36,38 @@ def logout_process():
 @app.route("/register", methods=['get', 'post'])
 def register_process():
     err_msg = None
+    err_msg1 = None # len(password) >= 8
+    err_msg2 = None # empty fullname and usernane field
+    err_msg3 = None
+    err_msg4 = None
     if request.method.__eq__('POST'):
         password = request.form.get('password')
         confirm = request.form.get('confirm')
-
-        if password.__eq__(confirm):
+        username = request.form.get('username')
+        gender = request.form.get('gender')
+        fname = request.form.get('name')
+        phone = request.form.get('phone')
+        if not username or not fname or not gender:
+            err_msg2 = '*Vui lòng nhập đầy đủ thông tin!!'
+        elif not password or len(password) < 8:
+            err_msg1 = '*Mật khẩu có độ dài tối thiểu là 8!!'
+        elif not password.__eq__(confirm):
+            err_msg = '*Mật khẩu KHÔNG khớp!!'
+        elif not request.form.get('accept-terms'):
+            err_msg3 = '**Bạn cần chấp nhận Điều khoản sử dụng!!'
+        elif not dao.check_unique_phone(phone):
+            err_msg4 = '**Số điện thoại đã được sử dụng!!'
+        else:
             data = request.form.copy()
             # ADD the function to check if the "Điều khoản" button is clicked
 
             del data['confirm']
-
+            del data['accept-terms']
             dao.add_user(**data)
             return redirect('/login')
-        else:
-            err_msg = 'Mật khẩu KHÔNG khớp!'
 
-    return render_template('register.html', err_msg=err_msg)
+    return render_template('register.html', err_msg=err_msg, err_msg1=err_msg1,
+                           err_msg2=err_msg2, err_msg3=err_msg3, err_msg4=err_msg4)
 
 
 @app.route("/user_arrangement")

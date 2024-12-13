@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     username = Column(String(50), nullable=False, unique=True)
     password = Column(String(50), nullable=False)
     gender = Column(String(50), nullable=True)
-    phone = Column(String(20), nullable=False)
+    phone = Column(String(20), nullable=False, unique=True)
     user_role = Column(Enum(UserRole), default=UserRole.USER)
     arrangement = relationship('Arrangement', backref='user', lazy=True)  # Backref tới bảng Arrangement
 
@@ -51,46 +51,47 @@ class Arrangement(db.Model):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
-        import hashlib
+        db.create_all() # create all the defined tables above
 
-        users = [{
-            "name": "nguyen dai nurse",
-            "username": "nurse",
-            "gender": "Nữ",
-            "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
-            "phone": "0903021744",
-            "user_role": UserRole.NURSE
-        }, {
-            "name": "nguyen dai",
-            "username": "patient123",
-            "gender": "Nam",
-            "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
-            "phone": "0903214124",
-            "user_role": UserRole.USER
-        }, {
-            "name": "nguyen dai doctor",
-            "username": "doctor",
-            "gender": "Nam",
-            "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
-            "phone": "0903021746",
-            "user_role": UserRole.DOCTOR
-        }]
+        # import hashlib
+        #
+        # users = [{
+        #     "name": "nguyen dai nurse",
+        #     "username": "nurse",
+        #     "gender": "Nữ",
+        #     "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
+        #     "phone": "0903021744",
+        #     "user_role": UserRole.NURSE
+        # }, {
+        #     "name": "nguyen dai",
+        #     "username": "patient123",
+        #     "gender": "Nam",
+        #     "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
+        #     "phone": "0903214124",
+        #     "user_role": UserRole.USER
+        # }, {
+        #     "name": "nguyen dai doctor",
+        #     "username": "doctor",
+        #     "gender": "Nam",
+        #     "password": str(hashlib.md5('123456'.encode('utf-8')).hexdigest()),
+        #     "phone": "0903021746",
+        #     "user_role": UserRole.DOCTOR
+        # }]
         # delete all users, arr_lists, arrangements before adding
         # db.session.query(Arrangement).delete()
         # db.session.query(ArrList).delete()
         # db.session.query(User).delete()
 
-        # adding users session
-        for u in users:
-            user = User(**u)
-            db.session.add(user)
-        db.session.commit()
+        # # adding users session
+        # for u in users:
+        #     user = User(**u)
+        #     db.session.add(user)
+        # db.session.commit()
 
-        import pytz
-
-        test_date = datetime.now()
-
+        # import pytz
+        #
+        # test_date = datetime.now()
+        #
         # # add patient id to arrangements
         # arrangements = [{
         #     "id_patient": User.id_patient,

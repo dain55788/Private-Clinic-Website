@@ -1,4 +1,4 @@
-from app.models import User
+from app.src.models import User
 from app import db
 import hashlib
 
@@ -30,3 +30,9 @@ def add_user(name, username, gender, password, phone):
 
     db.session.add(u)
     db.session.commit()
+
+
+def check_unique_phone(phone):
+    user = db.session.query(User).filter_by(phone=phone).first()
+
+    return user is None  # True if no user found, i.e., phone is unique
