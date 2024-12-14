@@ -1,4 +1,6 @@
 from app.src.models import User
+from app.src.models import Arrangement
+
 from app import db
 import hashlib
 
@@ -29,6 +31,21 @@ def add_user(name, username, gender, password, phone):
     u = User(name=name, username=username, gender=gender, password=password, phone=phone)
 
     db.session.add(u)
+    db.session.commit()
+
+
+def check_user_phone(phone):
+    u = User.query.filter(User.phone.__eq__(phone))
+    user_id = u.get_id()
+    return user_id
+
+
+def add_arrangement(id_patient, phone, name, appointment_date, address, description,  id_nurse=None):
+    id_patient = check_user_phone(phone)
+    arr = Arrangement(phone=phone, patient_name=name,
+                      appointment_date=appointment_date, address=address, description=description)
+
+    db.session.add(arr)
     db.session.commit()
 
 

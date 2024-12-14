@@ -21,6 +21,12 @@
             <span>hoặc sử dụng tài khoản</span>
             <input type="text" placeholder="Số Điện Thoại (+84)" id="phone" name="phone"/>
             <input type="password" placeholder="Mật Khẩu" id="password" name="password"/>
+            {% if err_msg1 %}
+            <label class="attention">{{ err_msg1 }}</label>
+            {% endif %}
+            {% if err_msg %}
+            <label class="attention">{{ err_msg }}</label>
+            {% endif %}
             <a href="#" id="login_btn">Quên mật khẩu?</a>
             <button>Đăng Nhập</button>
             <p>Chưa có tài khoản? <a href="/register"

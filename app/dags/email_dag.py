@@ -6,8 +6,8 @@ from airflow import DAG
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-sendgrid_api_key = os.getenv("SENDGRID_API_KEY")  # take the API key in the .env file
+# load_dotenv()
+# sendgrid_api_key = os.getenv("SENDGRID_API_KEY")  # take the API key in the .env file
 
 
 def email():
@@ -25,7 +25,8 @@ def email():
     )
 
     # main execution
-    sg = SendGridAPIClient(sendgrid_api_key)  # your actual Sengrid API key here
+    sg = SendGridAPIClient("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")
+    # your actual Sengrid API key here
     response = sg.send(message)
     print(response.status_code)
     print(response.body)
@@ -52,7 +53,7 @@ email_dag = DAG(
     'Arrangement_Email',
     description='Automatically sending arrangement announcement email to patient ',
     default_args=default_args,
-    schedule_interval='@once',  # run once
+    schedule_interval='0 11 * * *',  # send arrangement email to patient at 8p.m daily
     tags=['arrangement_email_sengrid'],
     catchup=False,
 )
@@ -63,5 +64,7 @@ email_sender = PythonOperator(
     python_callable=email,
     dag=email_dag
 )
+
+
 # DAG task dependencies:
 email_sender

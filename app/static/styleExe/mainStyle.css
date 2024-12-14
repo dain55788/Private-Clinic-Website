@@ -713,6 +713,17 @@ label {
     margin-bottom: 15px;
 }
 
+label.attention {
+    font-size : 1.5rem;
+    color: red;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    align-self: flex-start;
+}
+
 /* Flexbox to Align Items in One Row */
 .form-row {
     display: flex;
@@ -733,7 +744,7 @@ select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 7px;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 /* arrangement css page ends */

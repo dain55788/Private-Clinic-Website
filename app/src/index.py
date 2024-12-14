@@ -12,19 +12,24 @@ def index():
 
 @app.route("/login", methods=['get', 'post'])
 def login_process():
+    err_msg = None
+    err_msg1 = None
     if current_user.is_authenticated:
         return redirect('/')
-
     if request.method.__eq__('POST'):
         phone = request.form.get('phone')
         password = request.form.get('password')
+        if not phone or not password:
+            err_msg = '*Vui lòng nhập đầy đủ thông tin!!'
+        else:
+            user = dao.auth_user(phone=phone, password=password)
+            if user:
+                login_user(user=user)
+                return redirect('/')
+            else:
+                err_msg1 = '*Số điện thoại hoặc mật khẩu KHÔNG khớp!!'
 
-        user = dao.auth_user(phone=phone, password=password)
-        if user:
-            login_user(user=user)
-            return redirect('/')
-
-    return render_template('login.html')
+    return render_template('login.html', err_msg=err_msg, err_msg1=err_msg1)
 
 
 @app.route("/logout")
@@ -54,9 +59,9 @@ def register_process():
         elif not password.__eq__(confirm):
             err_msg = '*Mật khẩu KHÔNG khớp!!'
         elif not request.form.get('accept-terms'):
-            err_msg3 = '**Bạn cần chấp nhận Điều khoản sử dụng!!'
+            err_msg3 = '*Bạn cần chấp nhận Điều khoản sử dụng!!'
         elif not dao.check_unique_phone(phone):
-            err_msg4 = '**Số điện thoại đã được sử dụng!!'
+            err_msg4 = '*Số điện thoại đã được sử dụng!!'
         else:
             data = request.form.copy()
             # ADD the function to check if the "Điều khoản" button is clicked
@@ -81,7 +86,24 @@ login.login_view = 'login_process'
 
 @app.route("/dangKyLich")
 @login_required
-def dangKyLich():
+def dang_ky_lich():  # chưa xử lý ràng buộc về quy định số bệnh nhân trong ngày
+    err_msg = None
+    # err_msg1 = None
+    # err_msg2 = None  # empty fullname field
+    #
+    if request.method.__eq__('POST'):
+        phone = request.form.get('phone')
+        gender = request.form.get('gender')
+        fname = request.form.get('name')
+        email = request.form.get('email')
+        date = request.form.get('appointment_date')
+        if not fname or not gender or not phone or not date or not email:
+            err_msg = '*Vui lòng nhập đầy đủ thông tin!!'
+        # else:
+        #     data = request.form.copy()
+        #
+        #     dao.add_arrangement(**data)
+        #     return redirect('/login')
     return render_template('dangKyLich.html')
 
 

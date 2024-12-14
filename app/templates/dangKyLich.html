@@ -23,19 +23,15 @@
 
         <div class="form-container">
             <label for="phone">Số điện thoại:*</label>
-            <input type="number" placeholder="(+84)" name="" id="">
+            <input type="number" placeholder="(+84)" name="phone" id="phone">
             <label for="fullName">Họ và Tên:*</label>
-            <input type="text" placeholder="Họ và Tên*" name="" id="">
+            <input type="text" placeholder="Nguyễn Văn A" name="name" id="name">
             <label for="email">Email:*</label>
-            <input type="email" placeholder="Email*" name="" id="">
+            <input type="email" placeholder="email" name="email" id="email">
             <div class="form-row">
                 <div class="form-group">
-                    <label for="birthDate">Ngày Sinh:</label>
-                    <input type="date" id="birthDate">
-                </div>
-                <div class="form-group">
                     <label for="gender">Giới Tính:*</label>
-                    <select id="gender">
+                    <select id="gender" name="gender">
                         <option value="" disabled selected>Giới tính</option>
                         <option value="male">Nam</option>
                         <option value="female">Nữ</option>
@@ -44,13 +40,16 @@
                 </div>
                 <div class="form-group">
                 <label for="">Chọn Lịch Khám:*</label>
-                <input type="date" id="appointmentDate">
+                <input type="date" id="appointmentDate" name="appointmentDate">
                 </div>
             </div>
+            {% if err_msg %}
+            <label class="attention">{{ err_msg }} </label>
+            {% endif %}
             <label for="address">Địa chỉ:</label>
-            <input type="text" placeholder="Địa chỉ" name="" id="">
-            <textarea name="" cols="30" rows="10" id="" placeholder="Bệnh nhân ghi chú tại đây (Tình trạng đang gặp phải mô tả về bệnh, ...)"></textarea>
-            <input type="submit" value="Gửi">
+            <input type="text" placeholder="Địa chỉ" name="address" id="address">
+            <textarea cols="30" rows="10" id="note" name="note" placeholder="Bệnh nhân ghi chú tại đây (Tình trạng đang gặp phải mô tả về bệnh, ...)"></textarea>
+            <button class="btn">Gửi</button>
         </div>
     </div>
 </section>
