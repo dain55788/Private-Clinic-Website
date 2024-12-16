@@ -33,9 +33,11 @@ x-airflow-common:
     AIRFLOW__WEBSERVER__WARN_DEPLOYMENT_EXPOSURE: False
   volumes:
     - ./dags:/opt/airflow/dags
+    - ./app:/opt/airflow/app
     - ./plugins:/opt/airflow/plugins
-    # - ./logs:/opt/airflow/logs mount log ra window để trên airflow webserver xem đc log của task
-    # - ./news_data:/opt/airflow/Automated-News-Collection/news_data - này của project cũ
+    - ./app/src/models/Arrangement:/opt/airflow/Private-Clinic-Website/app/src/models/Arrangement
+    - ./logs:/opt/airflow/logs # mount log so that airflow can see the task log
+    - ./data:/opt/airflow/Private-Clinic-Website/data # arrangement data
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     &airflow-common-depends-on

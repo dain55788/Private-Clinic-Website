@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float, Enum, DateTime
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float, Enum, Date
 from sqlalchemy.orm import relationship
 from app import db, app
 from enum import Enum as RoleEnum
@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
 
 class ArrList(db.Model):
     id_arr_list = Column(Integer, primary_key=True, autoincrement=True)
-    appointment_date = Column(DateTime, nullable=False)
+    appointment_date = Column(Date, nullable=False)
     patient_quantity = Column(Integer, nullable=False)
     description = Column(String(255), nullable=True)
     arrangement = relationship('Arrangement', backref='arrlist', lazy=True)
@@ -46,15 +46,17 @@ class Arrangement(db.Model):
     id_patient = Column(Integer, ForeignKey(User.id_patient), nullable=False)  # Khóa ngoại tham chiếu User.id_patient
     id_nurse = Column(Enum(UserRole), default=UserRole.NURSE, nullable=True)  # nullable
     phone = Column(String(20), nullable=False)
+    email = Column(String(50), nullable=False)
+    gender = Column(String(50), nullable=False)
     patient_name = Column(String(50), nullable=False)
-    appointment_date = Column(DateTime, nullable=False)
+    appointment_date = Column(Date, nullable=False)
     address = Column(String(255), nullable=True)
     description = Column(String(255), nullable=True)
 
 
 if __name__ == '__main__':
     with app.app_context():
-        # db.create_all() # create all the defined tables above
+        db.create_all() # create all the defined tables above
 
         # import hashlib
         #
@@ -93,29 +95,29 @@ if __name__ == '__main__':
 
         # import pytz
         #
-        test_date = datetime.now()
+        # test_date = datetime.now()
 
         # add patient id to arrangements
-        test_user2 = User(name="Nguyen Dai", username="apache spark", password="12345", phone="0903021731")
-        test_user3 = User(name="Tom Hardy", username="venom", password="12345", phone="0128012924")
-
-        db.session.add_all([test_user2, test_user3])
-        db.session.commit()
-        user2_id = test_user2.id_patient
-        user3_id = test_user3.id_patient
-
-        arrangements = [{
-            "id_patient": user2_id,
-            "appointment_date": test_date,
-            "description": "het cuu",
-        }, {
-            "id_patient": user3_id,
-            "appointment_date": test_date,
-            "description": "het cuu",
-        }]
-
-        for arr in arrangements:
-            arrangement = Arrangement(**arr)
-            db.session.add(arrangement)
+        # test_user2 = User(name="Nguyen Dai", username="apache spark", password="12345", phone="0903021731")
+        # test_user3 = User(name="Tom Hardy", username="venom", password="12345", phone="0128012924")
+        #
+        # db.session.add_all([test_user2, test_user3])
+        # db.session.commit()
+        # user2_id = test_user2.id_patient
+        # user3_id = test_user3.id_patient
+        #
+        # arrangements = [{
+        #     "id_patient": user2_id,
+        #     "appointment_date": test_date,
+        #     "description": "het cuu",
+        # }, {
+        #     "id_patient": user3_id,
+        #     "appointment_date": test_date,
+        #     "description": "het cuu",
+        # }]
+        #
+        # for arr in arrangements:
+        #     arrangement = Arrangement(**arr)
+        #     db.session.add(arrangement)
 
         db.session.commit()

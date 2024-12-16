@@ -84,13 +84,12 @@ def user_arrangement():
 login.login_view = 'login_process'
 
 
-@app.route("/dangKyLich")
+@app.route("/dangKyLich", methods=['get', 'post'])
 @login_required
 def dang_ky_lich():  # chưa xử lý ràng buộc về quy định số bệnh nhân trong ngày
     err_msg = None
-    # err_msg1 = None
-    # err_msg2 = None  # empty fullname field
-    #
+    sc_msg = False
+
     if request.method.__eq__('POST'):
         phone = request.form.get('phone')
         gender = request.form.get('gender')
@@ -99,12 +98,12 @@ def dang_ky_lich():  # chưa xử lý ràng buộc về quy định số bệnh 
         date = request.form.get('appointment_date')
         if not fname or not gender or not phone or not date or not email:
             err_msg = '*Vui lòng nhập đầy đủ thông tin!!'
-        # else:
-        #     data = request.form.copy()
-        #
-        #     dao.add_arrangement(**data)
-        #     return redirect('/login')
-    return render_template('dangKyLich.html')
+        else:
+            sc_msg = True
+            data = request.form.copy()
+
+            dao.add_arrangement(**data)
+    return render_template('dangKyLich.html', err_msg=err_msg, sc_msg=sc_msg)
 
 
 @login.user_loader

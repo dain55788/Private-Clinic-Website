@@ -724,6 +724,17 @@ label.attention {
     align-self: flex-start;
 }
 
+label.successful_attention {
+    font-size: 1.7rem;
+    color: green;
+    background-color: #d4edda;  /* Light green background */
+    border: 1px solid #c3e6cb;
+    padding: 20px;  /* Space inside the label */
+    border-radius: 5px;  /* Rounded corners */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    margin: 10px 0 30px;
+}
+
 /* Flexbox to Align Items in One Row */
 .form-row {
     display: flex;
@@ -738,6 +749,8 @@ label.attention {
 input[type="text"],
 input[type="tel"],
 input[type="date"],
+input[type="address"],
+input[type="email"],
 textarea,
 select {
     width: 100%;
@@ -745,6 +758,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 7px;
     font-size: 1.8rem;
+    text-transform: none;
 }
 
 /* arrangement css page ends */

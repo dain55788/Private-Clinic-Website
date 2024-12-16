@@ -36,13 +36,12 @@ def add_user(name, username, gender, password, phone):
 
 def check_user_phone(phone):
     u = User.query.filter(User.phone.__eq__(phone))
-    user_id = u.get_id()
-    return user_id
+    return u.first().get_id()
 
 
-def add_arrangement(id_patient, phone, name, appointment_date, address, description,  id_nurse=None):
+def add_arrangement(phone, email, gender, name, appointment_date, address, description,  id_nurse=None):
     id_patient = check_user_phone(phone)
-    arr = Arrangement(phone=phone, patient_name=name,
+    arr = Arrangement(id_patient=id_patient, phone=phone, email=email, gender=gender, patient_name=name,
                       appointment_date=appointment_date, address=address, description=description)
 
     db.session.add(arr)
