@@ -79,7 +79,7 @@ def email(arr: Arrangement, to_mail):
     )
 
     # main execution
-    sg = SendGridAPIClient("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")
+    sg = SendGridAPIClient("")
     # your actual Sendgrid API key here
     response = sg.send(message)
     print(response.status_code)
